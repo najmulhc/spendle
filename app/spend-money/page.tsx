@@ -1,27 +1,19 @@
-"use client";
+'use client';
 import TransactionForm from "../components/TransactionForm";
 
 const AddMoney = () => {
-  const pageProps = {
-    title: "Add Money",
-    options: [
-      { value: "", text: "Select an option" },
-      { value: "food", text: "Food" },
-      { value: "cloth", text: "Cloth" },
-      { value: "transport", text: "Transport" },
-      { value: "treating friend", text: "Treating Friend" },
-      { value: "personal care", text: "Personal Care" },
-      { value: "other expenses", text: "Other Expenses" },
-    ],
-    submitText: "Add Money",
-  };
+  const title = "Spend money";
+  const options = [
+    { value: "", text: "Select an option" },
+    { value: "tuition", text: "Tuition" },
+    { value: "family", text: "Family" },
+    { value: "gift", text: "Gift" },
+    { value: "loan", text: "Loan" },
+    { value: "other", text: "Other" },
+  ];
+  const submitText = "Add Money";
   return (
-    <TransactionForm
-      title={pageProps.title}
-      options={pageProps.options}
-      submitText={pageProps.submitText} 
-      type="spending"
-    />
+    <TransactionForm title={title} options={options} submitText={submitText} type="spending" />
   );
 };
 
