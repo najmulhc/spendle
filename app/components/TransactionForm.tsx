@@ -1,19 +1,22 @@
 import { TransactionPageProps } from "@/types";
+import postData from "@/utils/postData";
 import { Formik, Form, Field } from "formik";
 
 const TransactionForm: React.FC<TransactionPageProps> = ({
   title,
   options,
-  submitText, type
+  submitText,
+  type,
 }) => {
-  const handleFormSubmit = (values: any) => {
-    console.log(values);
+  const handleFormSubmit = async (values: any) => {
+    const result = await postData(values);
+    console.log(result);
   };
   const initialvalue = {
     title: "",
     amount: 0,
     expenses: "",
-    type
+    type,
   };
   return (
     <main>
@@ -23,7 +26,14 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
           <label htmlFor="title">Title of transaction</label>
           <Field type="text" name="title" id="title" required />
           <label htmlFor="amount">Amount of Transaction in Taka</label>
-          <Field as="input" type="number" name="amount" id="amount" min={1} required />
+          <Field
+            as="input"
+            type="number"
+            name="amount"
+            id="amount"
+            min={1}
+            required
+          />
           <label htmlFor="expenses">Type</label>
           <Field as="select" name="expenses" id="expenses" required>
             {options.map((item) => (
