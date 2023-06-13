@@ -1,15 +1,13 @@
-import getData from "@/utils/getData";
+"use client";
+import {useSelector} from "react-redux"
 
 const Home = async () => {
-  const { lenden } = await getData();
+  const { username, account } = useSelector(state => state.user);
+
   return (
     <div>
       <h1>
-        You have{" "}
-        {lenden.type === "gaining"
-          ? `got $${lenden.amount} from`
-          : `spent $${lenden.amount} to`}{" "}
-        {lenden.title}{" "}
+        Hi, I am {username} and I have ${account.balence}
       </h1>
     </div>
   );

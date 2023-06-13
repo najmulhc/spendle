@@ -5,7 +5,7 @@ import connectToMongoDB from "@/lib/dbconnect";
 
 const GET = async () => {};
 const POST = async (req: NextRequest) => {
-  connectToMongoDB();
+  await connectToMongoDB();
   const { name, username, password } = await req.json();
 
   const hashedPassword = await bcrypt.hash(password, 12);
@@ -15,12 +15,10 @@ const POST = async (req: NextRequest) => {
     username,
     hashedPassword,
   });
-
-  const result = newUser.save();
-
+  await newUser.save();
   return NextResponse.json({
     data: {
-      result,
+      user:newUser,
     },
   });
 };

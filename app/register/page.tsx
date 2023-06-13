@@ -1,16 +1,29 @@
 "use client";
-import register from "@/utils/register";
 import { Field, Form, Formik } from "formik";
-
-const page = () => {
+import { useRouter } from "next/navigation";
+import register from "@/utils/register";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/UserSlice/userSlice";
+const Page = () => {
   const initialvalues = {
     username: "",
     password: "",
     name: "",
   };
+
+  const router = useRouter();
+  const dispatch = useDispatch();
   const handleRegister = async (values: any) => {
-    const result = await register(values);
-    console.log(result);
+    const { user } = await register(values);
+
+    const { username, account } = user;
+    dispatch(
+      setUser({
+        username,
+        account,
+      })
+    );
+    router.push('/add-money')
   };
   return (
     <main>
@@ -38,4 +51,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

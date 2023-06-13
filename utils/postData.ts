@@ -1,5 +1,5 @@
 const postData = async (req: any) => {
-  const response = await fetch("http://localhost:3000/api/hello", {
+  const response = await fetch("http://localhost:3000/api/transactions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

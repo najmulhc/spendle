@@ -1,3 +1,4 @@
+import store from "@/redux/store";
 import { TransactionPageProps } from "@/types";
 import postData from "@/utils/postData";
 import { Formik, Form, Field } from "formik";
@@ -8,8 +9,10 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   submitText,
   type,
 }) => {
+  const { username } = store.getState().user;
+   
   const handleFormSubmit = async (values: any) => {
-    const result = await postData(values);
+    const result = await postData({ ...values, user: username });
     console.log(result);
   };
   const initialvalue = {

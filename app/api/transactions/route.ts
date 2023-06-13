@@ -1,4 +1,5 @@
 import connectToMongoDB from "@/lib/dbconnect";
+import User from "@/models/UserModel";
 import Transaction from "@/models/transactionModel";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,11 +14,23 @@ const GET = async (req: NextRequest) => {
 
 const POST = async (req: NextRequest) => {
   await connectToMongoDB();
-
   const res = await req.json();
-  const newTransaction = new Transaction({ ...res });
+  const { user } = res;
+  const time = new Date();
+  const currentTime = time.getTime();
+  const newTransaction = new Transaction({ ...res, time: currentTime });
   await newTransaction.save();
-  return NextResponse.json({ done: true });
+  const { transastions } = await User.findOne({ username: user });
+
+  const updatedUser = await User.findOneAndUpdate(
+    { username: user },
+    {
+    transacitons:  true
+    },
+    { new: false }
+  );
+
+  return NextResponse.json({ user: updatedUser });
 };
 
 export { GET, POST };
