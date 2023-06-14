@@ -20,16 +20,13 @@ const POST = async (req: NextRequest) => {
   const currentTime = time.getTime();
   const newTransaction = new Transaction({ ...res, time: currentTime });
   await newTransaction.save();
-  const { transastions } = await User.findOne({ username: user });
+  const existingUser = await User.findOne({
+    username: user,
+  });
 
-  const updatedUser = await User.findOneAndUpdate(
-    { username: user },
-    {
-    transacitons:  true
-    },
-    { new: false }
-  );
-
+  existingUser.transactions.push(newTransaction);
+  const updatedUser = await  existingUser.save()
+  
   return NextResponse.json({ user: updatedUser });
 };
 

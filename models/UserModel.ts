@@ -16,9 +16,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  transastions: {
+  transactions: {
     type: [transactionSchema],
     required: false,
+    default: [],
   },
   account: {
     balence: { type: Number, required: false, default: 0 },
