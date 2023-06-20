@@ -29,7 +29,7 @@ const Login = () => {
         account,
       })
     );
-    router.push("/");
+    router.push("/app/add-money");
   };
   return (
     <main>

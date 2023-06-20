@@ -3,7 +3,7 @@ import useUser from "@/hooks/useUsers";
 import { setUser } from "@/redux/UserSlice/userSlice";
 import { useDispatch } from "react-redux";
 import { Button } from "../styled-components/Button.styled";
-import { NavLink, NavList, NavListItem } from "../styled-components/Nav.styled";
+import { NavAuthContainer, NavLink, NavListItem } from "../styled-components/Nav.styled";
 
 const NavAuth = () => {
   const username = useUser();
@@ -21,10 +21,10 @@ const NavAuth = () => {
       {username ? (
         <Button onClick={logOut}>Log Out</Button>
       ) : (
-        <NavList>
+        <NavAuthContainer>
           <NavListItem>
             <NavLink href="/auth/login">
-              <button>Log In</button>
+              <Button>Log In</Button>
             </NavLink>
           </NavListItem>
           <NavListItem>
@@ -32,7 +32,7 @@ const NavAuth = () => {
               <Button>Register</Button>
             </NavLink>
           </NavListItem>
-        </NavList>
+        </NavAuthContainer>
       )}
     </>
   );

@@ -1,7 +1,8 @@
+import { setUser } from "@/redux/UserSlice/userSlice";
 import store from "@/redux/store";
 import { TransactionPageProps } from "@/types";
 import { Formik, Form, Field } from "formik";
-import AppNavbar from '@/app/components/navbars/AppNavbar.tsx'
+import postTransaction from "../services/postTransaction";
 const TransactionForm: React.FC<TransactionPageProps> = ({
   title,
   options,
@@ -11,13 +12,19 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   const { username } = store.getState().user;
 
   const handleFormSubmit = async (values: any) => {
-    // const { user } = await postData({ ...values, user: username });
-    // store.dispatch(
-    //   setUser({
-    //     username: user.username,
-    //     account: user.account,
-    //   })
-    // );
+    const { amount } = values;
+    const { user } = await postTransaction({
+      user: username,
+      type,
+      amount,
+    });
+
+    store.dispatch(
+      setUser({
+        username,
+        account: user.account,
+      })
+    );
   };
   const initialvalue = {
     title: "",
@@ -27,7 +34,6 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   };
   return (
     <main>
-      <AppNavbar />
       <h2>{title}</h2>
       <Formik initialValues={initialvalue} onSubmit={handleFormSubmit}>
         <Form>

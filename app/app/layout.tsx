@@ -1,3 +1,4 @@
+import Footer from "../components/footer/Footer";
 import AppNavbar from "../components/navbars/AppNavbar";
 
 export const metadata = {
@@ -10,6 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <body>
         <AppNavbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
