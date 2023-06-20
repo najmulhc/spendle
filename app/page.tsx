@@ -1,15 +1,12 @@
 "use client";
-import {useSelector} from "react-redux"
+import LandingNavbar from "./components/navbars/landingNavbar";
 
 const Home = async () => {
-  const { username, account } = useSelector(state => state.user);
-
   return (
-    <div>
-      <h1>
-        Hi, I am {username} and I have ${account.balence}
-      </h1>
-    </div>
+    <main>
+      <LandingNavbar />
+      <h1>This is a truly server rendered Homepage for show only</h1>
+    </main>
   );
 };
 

@@ -1,9 +1,10 @@
 "use client";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import register from "@/utils/register";
 import { useDispatch } from "react-redux";
+import registerUser from "@/app/services/registerUser";
 import { setUser } from "@/redux/UserSlice/userSlice";
+import LandingNavbar from "@/app/components/navbars/landingNavbar";
 const Page = () => {
   const initialvalues = {
     username: "",
@@ -14,8 +15,8 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const handleRegister = async (values: any) => {
-    const { user } = await register(values);
-
+    const user = await registerUser(values);
+    
     const { username, account } = user;
     dispatch(
       setUser({
@@ -23,10 +24,12 @@ const Page = () => {
         account,
       })
     );
-    router.push('/add-money')
+    router.push(`/user/${username}`)
   };
   return (
     <main>
+      <LandingNavbar/>
+      <h2>Create an account</h2>
       <Formik initialValues={initialvalues} onSubmit={handleRegister}>
         <Form>
           <Field

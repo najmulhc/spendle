@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import User from "@/models/UserModel";
 import connectToMongoDB from "@/lib/dbconnect";
+import User from "@/models/UserModel";
+import bcrypt from "bcrypt";
 
 const GET = async () => {};
 const POST = async (req: NextRequest) => {
   await connectToMongoDB();
-  const { name, username, password } = await req.json();
+  const body = await req.json();
+  const { username, name, password } = body.user;
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -18,7 +19,7 @@ const POST = async (req: NextRequest) => {
   await newUser.save();
   return NextResponse.json({
     data: {
-      user:newUser,
+      user: newUser,
     },
   });
 };

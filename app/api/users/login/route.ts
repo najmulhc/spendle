@@ -1,12 +1,15 @@
 import bcrypt from "bcrypt";
 import User from "@/models/UserModel";
 import { NextRequest, NextResponse } from "next/server";
+import connectToMongoDB from "@/lib/dbconnect";
 
 const POST = async (req: NextRequest) => {
+  await connectToMongoDB();
   const { username, password } = await req.json();
   const foundUser = await User.find({
     username,
   });
+  console.log(username);
   if (foundUser[0]) {
     const correctPassword = await bcrypt.compare(
       password,
@@ -14,8 +17,9 @@ const POST = async (req: NextRequest) => {
     );
     if (correctPassword) {
       return NextResponse.json({
-        status: "Success",
-        user: foundUser[0],
+        data: {
+          user: foundUser[0],
+        },
       });
     } else {
       return NextResponse.json({

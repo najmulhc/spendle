@@ -1,7 +1,7 @@
 import Providers from "@/redux/Providers";
 import { LayOutProps } from "@/types";
 import { Metadata } from "next";
-import Hero from "./components/Hero";
+import "@/app/styles/global.css";
 
 export const metadata: Metadata = {
   title: "Finanzio",
@@ -11,10 +11,7 @@ const layout: React.FC<LayOutProps> = ({ children }) => {
   return (
     <html>
       <body>
-        <Providers>
-          <Hero />
-          {children}{" "}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -3,19 +3,18 @@ import User from "@/models/UserModel";
 import Transaction from "@/models/transactionModel";
 import { NextRequest, NextResponse } from "next/server";
 
-const GET = async (req: NextRequest) => {
+const GET = async (req:NextRequest ) => {
   await connectToMongoDB();
-
-  const transaction = await Transaction.find({});
+   
   return NextResponse.json({
-    lenden: transaction[0],
+    data:req,
   });
 };
 
 const POST = async (req: NextRequest) => {
   await connectToMongoDB();
   const res = await req.json();
-  const { user } = res;
+  const { user, type, amount } = res;
   const time = new Date();
   const currentTime = time.getTime();
   const newTransaction = new Transaction({ ...res, time: currentTime });
@@ -25,8 +24,16 @@ const POST = async (req: NextRequest) => {
   });
 
   existingUser.transactions.push(newTransaction);
-  const updatedUser = await  existingUser.save()
-  
+  if (type === "gaining") {
+    existingUser.account.balence += amount;
+    existingUser.account.gained += amount;
+  } else {
+    existingUser.account.balence -= amount;
+    existingUser.account.spent += amount;
+  }
+
+  const updatedUser = await existingUser.save();
+
   return NextResponse.json({ user: updatedUser });
 };
 
