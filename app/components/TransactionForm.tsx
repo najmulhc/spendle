@@ -1,8 +1,10 @@
 import { setUser } from "@/redux/UserSlice/userSlice";
 import store from "@/redux/store";
 import { TransactionPageProps } from "@/types";
-import { Formik, Form, Field } from "formik";
 import postTransaction from "../services/postTransaction";
+import { FormTitle, Input, Label, StyledForm } from "./styled-components/Form.styled";
+import { Button } from "./styled-components/Button.styled";
+import { Formik } from "formik";
 const TransactionForm: React.FC<TransactionPageProps> = ({
   title,
   options,
@@ -34,13 +36,13 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   };
   return (
     <main>
-      <h2>{title}</h2>
+      <FormTitle>{title}</FormTitle>
       <Formik initialValues={initialvalue} onSubmit={handleFormSubmit}>
-        <Form>
-          <label htmlFor="title">Title of transaction</label>
-          <Field type="text" name="title" id="title" required />
+        <StyledForm>
+          <Label htmlFor="title">Title of transaction</Label>
+          <Input type="text" name="title" id="title" required />
           <label htmlFor="amount">Amount of Transaction in Taka</label>
-          <Field
+          <Input
             as="input"
             type="number"
             name="amount"
@@ -49,15 +51,15 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
             required
           />
           <label htmlFor="expenses">Type</label>
-          <Field as="select" name="expenses" id="expenses" required>
+          <Input as="select" name="expenses" id="expenses" required>
             {options.map((item) => (
               <option key={item.value} value={item.value}>
                 {item.text}
               </option>
             ))}
-          </Field>
-          <button type="submit">{submitText}</button>
-        </Form>
+          </Input>
+          <Button type="submit">{submitText}</Button>
+        </StyledForm>
       </Formik>
     </main>
   );

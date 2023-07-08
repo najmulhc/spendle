@@ -7,7 +7,7 @@ export const NavHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #4f23e10d;
+  background-color: white;
   color: #18181888;
   border-bottom: 2px solid #4f23e1;
 
