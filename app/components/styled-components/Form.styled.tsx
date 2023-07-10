@@ -11,23 +11,29 @@ export const FormPageContainer = styled.main`
 `;
 
 export const StyledForm = styled(Form)`
-  border: 2px solid red;
   padding: 2rem;
   max-width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border-radius: 8px;
+ 
   box-shadow: 1rem 1rem 1rem #18181818;
   background-color: white; 
   @media only screen and (max-width: 767px) {
     padding: 1rem;
   }
 `;
-export const Label = styled.label``;
+export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+`;
+
+
 export const Input = styled(Field)`
   display: block;
-  width: auto;
+  width: 100%;
   padding: 0.25em;
   outline: none;
   border: 1px solid red;
@@ -39,5 +45,5 @@ export const Input = styled(Field)`
 `;
 export const FormTitle = styled.h2`
   text-align: center;
-  
+  color: white;
 `;

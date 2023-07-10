@@ -26,6 +26,12 @@ const userSchema = new Schema({
     spent: { type: Number, required: false, default: 0 },
     gained: { type: Number, required: false, default: 0 },
   },
+  spendingSources :{
+    type: [String], required: false, default: []
+  },
+  gainingSources :{
+    type: [String], required: false, default: []
+  }
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

@@ -29,7 +29,7 @@ const Page = () => {
         account,
       })
     );
-    router.push(`/user/${username}`);
+    router.push(`/app/user/${username}`);
   };
   return (
     <main>

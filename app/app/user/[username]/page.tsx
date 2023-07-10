@@ -1,17 +1,32 @@
 "use client";
 import AuthTester from "@/app/components/AuthTester";
-import getTransactions from "@/app/services/getTransactions";
-import { useSelector } from "react-redux";
+import TransactionType from "@/app/components/user/TransactionType";
 
 const Profile = async () => {
-  const {username, account} = useSelector(state => state.user)
-  const transactions = await getTransactions(username)
+  const user = {
+    username: "komola_shundori",
+    account: {
+      balence: 0,
+      spent: 0,
+      gained: 0,
+    },
+    spendingCategories: [],
+    gainingCategories: [],
+  };
+  const submitSpendingType = async (values: any) => {
+    const { gain } = values;
+  };
   return (
     <AuthTester>
-      <main>
-        <h2>Hi, {username}, you have ${account.balence} in your account </h2>
-        <h3>Totla {transactions.length} transactions have beeen completed</h3>
-      </main>
+      <div>
+        <h2>Hi, {user.username}</h2>
+        <h4>You have ${user.account.balence} in your account</h4>
+        <br />
+        <h2>Spending</h2>
+        <h5>You have spent ${user.account.spent}</h5>
+
+        <TransactionType type="Gaining" />
+      </div>
     </AuthTester>
   );
 };

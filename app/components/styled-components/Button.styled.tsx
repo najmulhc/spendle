@@ -3,6 +3,7 @@ export const Button = styled.button`
   display: inline-block;
   padding: 10px 20px;
   background-color: #4f23e1;
+  font-weight: 500;
   color: white;
   border: none;
   position: relative;
@@ -15,4 +16,8 @@ export const Button = styled.button`
     clip-path: polygon(0% 0, 92% 0%, 100% 100%, 8% 100%);
     cursor: pointer;
   }
+`;
+
+export const HidingButton = styled.button`
+  
 `;

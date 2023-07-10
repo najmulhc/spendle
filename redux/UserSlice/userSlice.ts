@@ -9,6 +9,8 @@ const userSlice = createSlice({
       gained: 0,
     },
     transactions: [],
+    gainingSources: [],
+    spendingSources: [],
   },
   reducers: {
     setUser: (state, action) => {
@@ -20,9 +22,17 @@ const userSlice = createSlice({
       const { transactions } = action.payload;
       state.transactions = [...transactions];
     },
+    setGainingSources : (state , action) => {
+       state.gainingSources = [...action.payload.gainingSources];
+    },
+    setSpendingSource : (state , action) => {
+       const { spendingSources } = action.payload;
+       state.spendingSources = [...spendingSources];
+    },
+
   },
 });
 
-export const { setUser, setTransactions } = userSlice.actions;
+export const { setUser, setTransactions, setGainingSources, setSpendingSource } = userSlice.actions;
 
 export default userSlice.reducer;

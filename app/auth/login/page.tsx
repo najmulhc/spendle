@@ -3,10 +3,11 @@ import { Formik } from "formik";
 import LandingNavbar from "@/app/components/navbars/landingNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import login from "@/app/services/LoginUser";
-import { setUser } from "@/redux/UserSlice/userSlice";
+import { setGainingSources, setSpendingSource, setUser } from "@/redux/UserSlice/userSlice";
 import { useRouter } from "next/navigation";
 import {
   FormPageContainer,
+  FormTitle,
   Input,
   Label,
   StyledForm,
@@ -36,6 +37,16 @@ const Login = () => {
         account,
       })
     );
+    dispatch(
+      setGainingSources({
+        gainingSources: user.gainingSources,
+      })
+    );
+    dispatch(
+      setSpendingSource({
+        spendingSources: user.spendingSources,
+      })
+    );
     router.push("/app/add-money");
   };
   return (
@@ -43,7 +54,7 @@ const Login = () => {
       {" "}
       <LandingNavbar />
       <FormPageContainer>
-        <h2>Log In to your account</h2>
+        <FormTitle>Log In to your account</FormTitle>
         <Formik initialValues={iniitialValue} onSubmit={handleLogin}>
           <StyledForm>
             <Label htmlFor="username">
