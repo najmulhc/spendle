@@ -1,9 +1,8 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import "@/app/styles/testing.css";
-import { NavLink, NavListItem } from "../styled-components/Nav.styled";
-import { Button } from "../styled-components/Button.styled";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const NavbarUser = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -17,10 +16,10 @@ const NavbarUser = () => {
     return <span>{username}</span>;
   } else {
     return (
-      <NavListItem>
-        <NavLink href={`/app/user/${username}`}>{username}</NavLink>
-        <Button onClick={logOut}>Log Out </Button>
-      </NavListItem>
+      <li>
+        <Link href={`/app/user/${username}`}>{username}</Link>
+        <button onClick={logOut}>Log Out </button>
+      </li>
     );
   }
 };

@@ -1,22 +1,12 @@
 "use client";
-import { Formik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import login from "@/app/services/LoginUser";
-import { setUser } from "@/redux/UserSlice/userSlice";
+import { Field, Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import {
-  FormPageContainer,
-  FormTitle,
-  Input,
-  Label,
-  StyledForm,
-} from "@/app/components/styled-components/Form.styled";
-import { Button } from "@/app/components/styled-components/Button.styled";
 import { useState } from "react";
-import { P } from "@/app/components/styled-components/Typography.styled";
+import { setUser } from "@/redux/UserSlice/userSlice";
+import login from "@/app/services/LoginUser";
 
 const Login = () => {
-  const { user } = useSelector((state: any) => state.user);
   const [errorMessage, setErrorMessage] = useState(" ");
   const dispatch = useDispatch();
   const iniitialValue = {
@@ -25,6 +15,7 @@ const Login = () => {
   };
   const router = useRouter();
   const handleLogin = async (values: any) => {
+    console.log(values);
     const response = await login({
       username: values.username,
       password: values.password,
@@ -47,37 +38,34 @@ const Login = () => {
     router.push("/app/dashboard");
   };
   return (
-    <FormPageContainer>
-      <FormTitle>Log In to your account</FormTitle>
+    <main>
+      <h2>Log In to your account</h2>
       <Formik initialValues={iniitialValue} onSubmit={handleLogin}>
-        <StyledForm>
-          <Label htmlFor="username">
+        <Form>
+          <label htmlFor="username">
             Enter Username
-            <Input
+            <Field
               type="text"
               placeholder="najmulhc"
               name="username"
               id="username"
               required
             />
-          </Label>
-          <Label htmlFor="password">
+          </label>
+          <label htmlFor="password">
             Enter Password
-            <Input
+            <Field
               type="password"
               placeholder="*******"
               name="password"
               id="passord"
               required
             />{" "}
-          </Label>
-          <Button type="submit"> Log in</Button>
-          <P color="#8B0000" textAlign="center">
-            {errorMessage}
-          </P>
-        </StyledForm>
+          </label>
+          <button type="submit">Log in</button>
+        </Form>
       </Formik>
-    </FormPageContainer>
+    </main>
   );
 };
 

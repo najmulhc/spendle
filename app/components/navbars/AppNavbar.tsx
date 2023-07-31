@@ -1,35 +1,29 @@
 "use client";
-import {
-  Logo,
-  LogoText,
-  NavHeader,
-  NavLink,
-  NavList,
-  NavListItem,
-} from "../styled-components/Nav.styled";
+import Link from "next/link";
+import { Logo } from "../styled-components/Nav.styled";
 import NavbarUser from "./NavbarUser";
 
 const AppNavbar = () => {
   return (
-    <NavHeader>
+    <header>
       <Logo>
-        <NavLink href="/">
-          <LogoText> Spendle</LogoText>
-        </NavLink>
+        <Link href="/">
+          <h2> Spendle</h2>
+        </Link>
       </Logo>
-      <NavList>
-        <NavListItem>
-          <NavLink href="/app/dashboard">Dashboard</NavLink>
-        </NavListItem>
-        <NavListItem>
-          <NavLink href="/app/add-money">Add Money</NavLink>
-        </NavListItem>
-        <NavListItem>
-          <NavLink href="/app/spend-money">Spend Money</NavLink>
-        </NavListItem>
+      <ul>
+        <li>
+          <Link href="/app/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <Link href="/app/add-money">Add Money</Link>
+        </li>
+        <li>
+          <Link href="/app/spend-money">Spend Money</Link>
+        </li>
         <NavbarUser />
-      </NavList>
-    </NavHeader>
+      </ul>
+    </header>
   );
 };
 

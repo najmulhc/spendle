@@ -1,5 +1,4 @@
-'use client';
-import { Button } from "@/app/components/styled-components/Button.styled";
+"use client";
 import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
@@ -10,7 +9,7 @@ const Dashboard = () => {
   };
   return (
     <main>
-      <Button onClick={goHome}>Go To Home</Button>
+      <button onClick={goHome}>Go To Home</button>
     </main>
   );
 };

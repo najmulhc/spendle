@@ -1,47 +1,30 @@
 "use client";
-import {
-  Logo,
-  LogoText,
-  MobileNavToggle,
-  NavHeader,
-  NavLink,
-  NavList,
-  NavListItem,
-} from "../styled-components/Nav.styled";
-import { RiCloseLine, RiMenuLine } from "react-icons/ri";
-import { useState } from "react";
 import Image from "next/image";
 import logo from "../../asset/logo.svg";
 import NavAuth from "./NavAuth";
+import Link from "next/link";
 
 const LandingNavbar = () => {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-
-  const toggleMobileNav = () => {
-    setIsMobileNavOpen(!isMobileNavOpen);
-  };
   return (
-    <NavHeader>
-      <Logo>
+    <header>
+      <div>
         <Image src={logo} width={48} height={48} alt="Logo" />
-        <LogoText> Spendle</LogoText>
-      </Logo>
-      <MobileNavToggle onClick={toggleMobileNav}>
-        {isMobileNavOpen ? <RiCloseLine /> : <RiMenuLine />}
-      </MobileNavToggle>
-      <NavList isOpen={isMobileNavOpen}>
-        <NavListItem>
-          <NavLink href="/">Home</NavLink>
-        </NavListItem>
-        <NavListItem>
-          <NavLink href="/product">Product</NavLink>
-        </NavListItem>
-        <NavListItem>
-          <NavLink href="/blog">Blog</NavLink>
-        </NavListItem>{" "}
-      </NavList>
-      <NavAuth/>
-    </NavHeader>
+        <h2> Spendle</h2>
+      </div>
+
+      <ul>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/product">Product</Link>
+        </li>
+        <li>
+          <Link href="/blog">Blog</Link>
+        </li>{" "}
+      </ul>
+      <NavAuth />
+    </header>
   );
 };
 

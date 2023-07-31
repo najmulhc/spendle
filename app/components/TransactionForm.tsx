@@ -1,17 +1,12 @@
 import store from "@/redux/store";
 import { TransactionPageProps } from "@/types";
-import {
-  FormPageContainer,
-  FormTitle,
-  Input,
-  Label,
-  StyledForm,
-} from "./styled-components/Form.styled";
+import { Input, Label } from "./styled-components/Form.styled";
 import { Button } from "./styled-components/Button.styled";
 import { Formik } from "formik";
 import postTransaction from "../services/postTransaction";
 import { setUser } from "@/redux/UserSlice/userSlice";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const TransactionForm: React.FC<TransactionPageProps> = ({
   title,
@@ -21,7 +16,7 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
 }) => {
   const { username } = store.getState().user;
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const handleFormSubmit = async (values: any) => {
     const { amount, transactionTitle } = values;
     console.log(values);
@@ -31,8 +26,8 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
       amount,
       title: transactionTitle,
     });
-
-    store.dispatch(
+    console.log(user);
+    dispatch(
       setUser({
         username,
         account: user.account,
@@ -44,8 +39,8 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   };
 
   return (
-    <FormPageContainer>
-      <FormTitle>{title}</FormTitle>
+    <div>
+      <h1>{title}</h1>
       <Formik
         initialValues={{
           title: "",
@@ -55,18 +50,18 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
         }}
         onSubmit={handleFormSubmit}
       >
-        <StyledForm>
-          <Label htmlFor="title">
+        <form>
+          <label htmlFor="title">
             Title of transaction
-            <Input
+            <input
               type="text"
               name="transactionTitle"
               id="transactionTitle"
               required
             />
-          </Label>
+          </label>
           <Label htmlFor="amount">Amount of Transaction in Taka </Label>
-          <Input type="number" name="amount" id="amount" required />
+          <input type="number" name="amount" id="amount" required />
           <Label htmlFor="expenses">
             Type
             <Input as="select" name="expenses" id="expenses" required>
@@ -78,9 +73,9 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
             </Input>
           </Label>
           <Button type="submit">{submitText}</Button>
-        </StyledForm>
+        </form>
       </Formik>
-    </FormPageContainer>
+    </div>
   );
 };
 

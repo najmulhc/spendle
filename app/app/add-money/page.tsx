@@ -20,6 +20,7 @@ const AddMoney = () => {
   return (
     <AuthTester>
       <TransactionForm
+      
         title={pageProps.title}
         options={pageProps.options}
         submitText={pageProps.submitText}
