@@ -1,8 +1,7 @@
 import store from "@/redux/store";
 import { TransactionPageProps } from "@/types";
-import { Input, Label } from "./styled-components/Form.styled";
-import { Button } from "./styled-components/Button.styled";
-import { Formik } from "formik";
+import { Label } from "./styled-components/Form.styled";
+import { Field, Form, Formik } from "formik";
 import postTransaction from "../services/postTransaction";
 import { setUser } from "@/redux/UserSlice/userSlice";
 import { useRouter } from "next/navigation";
@@ -50,7 +49,7 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
         }}
         onSubmit={handleFormSubmit}
       >
-        <form>
+        <Form>
           <label htmlFor="title">
             Title of transaction
             <input
@@ -60,20 +59,20 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
               required
             />
           </label>
-          <Label htmlFor="amount">Amount of Transaction in Taka </Label>
-          <input type="number" name="amount" id="amount" required />
+          <label htmlFor="amount">Amount of Transaction in Taka </label>
+          <Field type="number" name="amount" id="amount" required />
           <Label htmlFor="expenses">
             Type
-            <Input as="select" name="expenses" id="expenses" required>
+            <Field as="select" name="expenses" id="expenses" required>
               {options.map((item) => (
                 <option key={item.value} value={item.value}>
                   {item.text}
                 </option>
               ))}
-            </Input>
+            </Field>
           </Label>
-          <Button type="submit">{submitText}</Button>
-        </form>
+          <button type="submit">{submitText}</button>
+        </Form>
       </Formik>
     </div>
   );

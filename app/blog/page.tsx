@@ -1,7 +1,10 @@
+import LandingNavbar from "../components/navbars/landingNavbar";
+
 export default function Blog() {
   return (
-    <main>
-      <h1>we will have a blog </h1>
-    </main>
+   <main>
+    <LandingNavbar></LandingNavbar>
+    <h1>Welcome to the blog sec</h1>
+   </main>
   );
 }

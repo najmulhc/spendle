@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import registerUser from "@/app/services/registerUser";
 import { setUser } from "@/redux/UserSlice/userSlice";
+import LandingNavbar from "@/app/components/navbars/landingNavbar";
 const Page = () => {
   const initialvalues = {
     username: "",
@@ -27,6 +28,7 @@ const Page = () => {
   };
   return (
     <main>
+      <LandingNavbar/>
       <h2>Create an account</h2>
       <Formik initialValues={initialvalues} onSubmit={handleRegister}>
         <Form>

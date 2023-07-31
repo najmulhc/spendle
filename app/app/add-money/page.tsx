@@ -1,6 +1,7 @@
 "use client";
 import AuthTester from "@/app/components/AuthTester";
 import TransactionForm from "@/app/components/TransactionForm";
+import AppNavbar from "@/app/components/navbars/AppNavbar";
 import { useSelector } from "react-redux";
 
 const AddMoney = () => {
@@ -19,6 +20,7 @@ const AddMoney = () => {
   }
   return (
     <AuthTester>
+      <AppNavbar/>
       <TransactionForm
       
         title={pageProps.title}

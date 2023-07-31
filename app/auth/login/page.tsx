@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { setUser } from "@/redux/UserSlice/userSlice";
 import login from "@/app/services/LoginUser";
+import LandingNavbar from "@/app/components/navbars/landingNavbar";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(" ");
@@ -39,6 +40,7 @@ const Login = () => {
   };
   return (
     <main>
+      <LandingNavbar/>
       <h2>Log In to your account</h2>
       <Formik initialValues={iniitialValue} onSubmit={handleLogin}>
         <Form>
