@@ -8,9 +8,10 @@ import {
   StyledForm,
 } from "./styled-components/Form.styled";
 import { Button } from "./styled-components/Button.styled";
-import { Formik } from "formik"; 
+import { Formik } from "formik";
 import postTransaction from "../services/postTransaction";
 import { setUser } from "@/redux/UserSlice/userSlice";
+import { useRouter } from "next/navigation";
 
 const TransactionForm: React.FC<TransactionPageProps> = ({
   title,
@@ -19,29 +20,29 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
   type,
 }) => {
   const { username } = store.getState().user;
+  const router = useRouter();
 
   const handleFormSubmit = async (values: any) => {
-    const { amount } = values;
+    const { amount, transactionTitle } = values;
     console.log(values);
-     const { user } = await postTransaction({
-    user: username,
-    type,
-   amount,
+    const { user } = await postTransaction({
+      user: username,
+      type,
+      amount,
+      title: transactionTitle,
     });
 
-   store.dispatch(
-     setUser({
+    store.dispatch(
+      setUser({
         username,
         account: user.account,
+        gainingSources: user.gainingSources,
+        spendingSoruces: user.spendingSources,
       })
     );
+    router.push("/app/dashboard");
   };
-  const initialvalue = {
-    title: "",
-    amount: 0,
-    expenses: "",
-    type,
-  };
+
   return (
     <FormPageContainer>
       <FormTitle>{title}</FormTitle>
@@ -57,7 +58,12 @@ const TransactionForm: React.FC<TransactionPageProps> = ({
         <StyledForm>
           <Label htmlFor="title">
             Title of transaction
-            <Input type="text" name="title" id="title" required />
+            <Input
+              type="text"
+              name="transactionTitle"
+              id="transactionTitle"
+              required
+            />
           </Label>
           <Label htmlFor="amount">Amount of Transaction in Taka </Label>
           <Input type="number" name="amount" id="amount" required />

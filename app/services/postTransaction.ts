@@ -2,10 +2,12 @@ const postTransaction = async ({
   user,
   type,
   amount,
+  title,
 }: {
   user: string;
   type: "gaining" | "spending";
   amount: number;
+  title: string;
 }) => {
   const options = {
     method: "POST",
@@ -16,7 +18,7 @@ const postTransaction = async ({
       user,
       type,
       amount,
-      title: "somethjing "
+      title,
     }),
   };
   const response = await fetch(
@@ -24,7 +26,7 @@ const postTransaction = async ({
     options
   );
   const data = await response.json();
-  console.log(data);
+ 
   return data;
 };
 

@@ -1,25 +1,35 @@
 "use client";
 import useUser from "@/hooks/useUsers";
-import { setUser } from "@/redux/UserSlice/userSlice";
 import { useDispatch } from "react-redux";
 import { Button } from "../styled-components/Button.styled";
-import { NavAuthContainer, NavLink, NavListItem } from "../styled-components/Nav.styled";
+import {
+  NavAuthContainer,
+  NavLink,
+  NavListItem,
+} from "../styled-components/Nav.styled";
+import { P } from "../styled-components/Typography.styled";
+import { resetState } from "@/redux/UserSlice/userSlice";
 
 const NavAuth = () => {
   const username = useUser();
   const dispatch = useDispatch();
   const logOut = () => {
-    dispatch(
-      setUser({
-        username: "",
-      })
-    );
+    dispatch(resetState());
   };
   return (
     <>
       {" "}
       {username ? (
-        <Button onClick={logOut}>Log Out</Button>
+        <NavAuthContainer>
+          <NavListItem>
+            <Button onClick={logOut}>Log Out</Button>
+          </NavListItem>
+          <NavListItem>
+            <NavLink href="/app/dashboard">
+              <P>Dashboard</P>
+            </NavLink>
+          </NavListItem>
+        </NavAuthContainer>
       ) : (
         <NavAuthContainer>
           <NavListItem>

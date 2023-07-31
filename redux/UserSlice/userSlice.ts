@@ -1,38 +1,50 @@
 import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+  username: "",
+  account: {
+    balence: 0,
+    spent: 0,
+    gained: 0,
+  },
+  transactions: [],
+  gainingSources: [],
+  spendingSources: [],
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    username: "",
-    account: {
-      balence: 0,
-      spent: 0,
-      gained: 0,
-    },
-    transactions: [],
-    gainingSources: [],
-    spendingSources: [],
-  },
+  initialState,
   reducers: {
     setUser: (state, action) => {
-      const { username, account } = action.payload;
+      const { username, account, gainingSources, spendingSources } =
+        action.payload;
       state.username = username;
       state.account = account;
+      state.gainingSources = [...gainingSources];
+      state.spendingSources = [...spendingSources];
     },
     setTransactions: (state, action) => {
       const { transactions } = action.payload;
       state.transactions = [...transactions];
     },
-    setGainingSources : (state , action) => {
-       state.gainingSources = [...action.payload.gainingSources];
+    setGainingSources: (state, action) => {
+      state.gainingSources = [...action.payload.gainingSources];
     },
-    setSpendingSource : (state , action) => {
-       const { spendingSources } = action.payload;
-       state.spendingSources = [...spendingSources];
+    setSpendingSource: (state, action) => {
+      const { spendingSources } = action.payload;
+      state.spendingSources = [...spendingSources];
     },
-
+    resetState: (state, action) => {
+      state = { ...state, ...initialState };
+    },
   },
 });
 
-export const { setUser, setTransactions, setGainingSources, setSpendingSource } = userSlice.actions;
+export const {
+  setUser,
+  setTransactions,
+  setGainingSources,
+  setSpendingSource,resetState
+} = userSlice.actions;
 
 export default userSlice.reducer;

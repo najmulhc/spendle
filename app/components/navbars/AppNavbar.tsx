@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import {
   Logo,
   LogoText,
@@ -8,18 +7,17 @@ import {
   NavList,
   NavListItem,
 } from "../styled-components/Nav.styled";
-import logo from "../../asset/logo.svg";
 import NavbarUser from "./NavbarUser";
 
 const AppNavbar = () => {
   return (
     <NavHeader>
       <Logo>
-        <Image src={logo} width={48} height={48} alt="Logo" />
-        <LogoText> Spendle</LogoText>
+        <NavLink href="/">
+          <LogoText> Spendle</LogoText>
+        </NavLink>
       </Logo>
       <NavList>
- 
         <NavListItem>
           <NavLink href="/app/dashboard">Dashboard</NavLink>
         </NavListItem>

@@ -17,20 +17,19 @@ const POST = async (req: NextRequest) => {
     );
     if (correctPassword) {
       return NextResponse.json({
-        data: {
-          user: foundUser[0],
-        },
+        status: "success",
+        user: foundUser[0],
       });
     } else {
       return NextResponse.json({
         status: "failed",
-        message: "Incorrect Password",
+        message: "The password entered is not correct!",
       });
     }
   }
   return NextResponse.json({
     status: "failed",
-    message: "user not found",
+    message: `The user ${username} does not exists!`,
   });
 };
 
