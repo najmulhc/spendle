@@ -43,33 +43,42 @@ const TransactionType: React.FC<TransactionType> = ({ type }) => {
     const source = {
       username,
       type,
-      text:item,
+      text: item,
     };
-     const updatedUser = await deleteTransactionSource(source);
-     console.log(updatedUser);
-     dispatch(
-       setGainingSources({
-         gainingSources: updatedUser.gainingSources,
-       })
-     );
-     dispatch(
-       setSpendingSource({
-         spendingSources: updatedUser.spendingSources,
-       })
-     );
+    const updatedUser = await deleteTransactionSource(source);
+    console.log(updatedUser);
+    dispatch(
+      setGainingSources({
+        gainingSources: updatedUser.gainingSources,
+      })
+    );
+    dispatch(
+      setSpendingSource({
+        spendingSources: updatedUser.spendingSources,
+      })
+    );
   };
   return (
     <section>
       <h2>YOur {type}s</h2>
       <ul>
-        {gainingSources.map((item: string) => (
-          <li key={item}>
-            <span>{item}</span>
-            <HidingButton onClick={() => handleDeleteItem(item)}>
-              X
-            </HidingButton>
-          </li>
-        ))}
+        {type === "Gaining"
+          ? gainingSources.map((item: string) => (
+              <li key={item}>
+                <span>{item}</span>
+                <HidingButton onClick={() => handleDeleteItem(item)}>
+                  X
+                </HidingButton>
+              </li>
+            ))
+          : spendingSources.map((item: string) => (
+              <li key={item}>
+                <span>{item}</span>
+                <HidingButton onClick={() => handleDeleteItem(item)}>
+                  X
+                </HidingButton>
+              </li>
+            ))}
         <li>
           <input
             type="text"

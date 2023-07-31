@@ -1,26 +1,30 @@
 "use client";
 import AuthTester from "@/app/components/AuthTester";
 import TransactionForm from "@/app/components/TransactionForm";
+import { useSelector } from "react-redux";
 
 const AddMoney = () => {
-  const title = "Spend money";
-  const options = [
-    { value: "", text: "Select an option" },
-    { value: "food", text: "Food" },
-    { value: "cloth", text: "Cloth" },
-    { value: "transport", text: "Transport" },
-    { value: "treating friend", text: "Treating Friend" },
-    { value: "personal care", text: "Personal Care" },
-    { value: "other expenses", text: "Other Expenses" },
-  ];
-  const submitText = "Add Money";
+  const { spendingSources } = useSelector((state) => state.user);
+
+  const pageProps = {
+    title: "Spend Money",
+    options: [{ value: "", text: "Select an option" }],
+    submitText: "Spend Money",
+  };
+  for (let item of spendingSources) {
+    const option = {
+      text: item,
+      value: item.replace(/\s/g, "-"),
+    };
+    pageProps.options.push(option);
+  }
+
   return (
     <AuthTester>
-       
       <TransactionForm
-        title={title}
-        options={options}
-        submitText={submitText}
+        title={pageProps.title}
+        options={pageProps.options}
+        submitText={pageProps.submitText}
         type="spending"
       />
     </AuthTester>

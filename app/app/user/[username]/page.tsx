@@ -22,10 +22,10 @@ const Profile = async () => {
         <h2>Hi, {user.username}</h2>
         <h4>You have ${user.account.balence} in your account</h4>
         <br />
-        <h2>Spending</h2>
-        <h5>You have spent ${user.account.spent}</h5>
+        
 
         <TransactionType type="Gaining" />
+        <TransactionType type="Spending" />
       </div>
     </AuthTester>
   );
