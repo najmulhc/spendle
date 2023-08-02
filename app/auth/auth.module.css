@@ -1,0 +1,31 @@
+.heading{
+    text-align: center;
+    padding: 1.5rem 0;
+}
+.form {
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 10px #35353556;
+    max-width: 360px;
+    margin-bottom: 2rem;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin:.5rem 0rem;
+}
+
+.formInput {
+   width: 100%;
+}
+
+.authButton{
+   margin: 0 auto;
+}
+
+.main {
+    background-color: beige;
+    padding: 2rem 0;
+}

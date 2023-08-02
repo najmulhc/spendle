@@ -1,4 +1,4 @@
-import Providers from "@/redux/Providers";
+import Providers from "../redux/Providers";
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import "./globals.css";

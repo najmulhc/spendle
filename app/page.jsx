@@ -1,8 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
 import styles from "./home.module.css";
-import { setToApp, setToLanding } from "@/redux/navbarSlice/navbarSlice";
 import { useEffect } from "react";
+import { setToApp, setToLanding } from "../redux/navbarSlice/navbarSlice";
 export default function HomePage() {
   const dispatch = useDispatch();
   useEffect(() => {
